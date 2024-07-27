@@ -1,0 +1,22 @@
+<header>
+  <div class="header">
+    <div class="auth-status">
+      <!-- Barre de basculement pour afficher les boutons -->
+      <div class="toggle-bar">
+        <!-- Bouton Login -->
+        <button 
+          [ngClass]="{'btn-grey': isAdminLoggedIn, 'btn-green': !isAdminLoggedIn}" 
+          (click)="login()">
+          Login
+        </button>
+
+        <!-- Bouton Logout -->
+        <button 
+          [ngClass]="{'btn-grey': !isAdminLoggedIn, 'btn-red': isAdminLoggedIn}" 
+          (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

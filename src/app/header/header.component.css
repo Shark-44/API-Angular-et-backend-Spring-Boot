@@ -1,0 +1,42 @@
+.header {
+    padding: 0.2rem;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    position: fixed;
+    top: 10px;
+    right: 15px;
+  }
+  
+  .auth-status {
+    display: flex;
+    align-items: center;
+  }
+  
+  .toggle-bar {
+    display: flex;
+    gap: 0.5rem;
+    
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .btn-grey {
+    background-color: grey;
+    color: white;
+  }
+  
+  .btn-green {
+    background-color: green;
+    color: white;
+  }
+  
+  .btn-red {
+    background-color: red;
+    color: white;
+  }
+  

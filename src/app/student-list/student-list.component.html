@@ -1,0 +1,24 @@
+<div class="carddetail">
+    <div *ngFor="let student of listStudent; let i = index" [attr.key]="i" class="globalCard">
+      <div *ngIf="showDelete" id="delbutton">
+        <button (click)="handleDelStudent(student.idStudent)">X</button>
+      </div>
+      <div *ngIf="showManage" id="Manbutton">
+        <a ref="/ManageStudent">
+          <button>V</button>
+        </a>
+      </div>
+      <div class="details">
+        <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">
+        <p>Nom: {{ student.name }}</p>
+        <p>Prénom: {{ student.firstname }}</p>
+      </div>
+      <div *ngIf="isPopoverOpen(student.idStudent)" class="popover-content">
+        <div class="px-1 py-2">
+          <div class="text-small font-bold">Anniversaire: {{ formatDate(student.birthday) }}</div>
+          <p>Langages étudiés: {{ getLangageNames(student) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

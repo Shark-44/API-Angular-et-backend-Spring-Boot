@@ -1,0 +1,22 @@
+
+.containerHome .title {
+    background-color: rgb(231, 189, 85);
+    border: 5px solid rgb(114, 85, 10);
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+    position: relative;
+    top: -30px;
+}
+.containerHome .Lien {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+}
+.containerHome .Lien a img {
+    width: 250px;
+    border-radius: 20px;
+}
+.containerHome .Lien a p {
+    color: white;
+}

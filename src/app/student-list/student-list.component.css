@@ -1,0 +1,41 @@
+.carddetail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.globalCard{
+    text-align: center;
+}
+.carddetail .details {
+    background-color: bisque;
+    width: 250px;
+    text-align: center;
+    padding-top: 25px;
+    border: 2px solid brown;
+    border-radius: 10px;
+}
+
+.carddetail .details img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+.py-2 {
+    background-color: rgb(44, 41, 41);
+    color: white;
+    padding: 10px;
+}
+.capitalize {
+    position: relative;
+    top: 10px;
+    background: rgb(93, 224, 163);
+}
+#delbutton {
+    position: relative;
+    position: relative;
+    top: 15%;
+    right: -35%;
+}
+#delbutton button {
+    background: red;
+}

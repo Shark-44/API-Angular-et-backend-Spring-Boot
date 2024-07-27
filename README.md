@@ -26,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 # API-Angular-et-backend-Spring-Boot
+
+-------------------------------------
+Ce projet suit ce travail que j'ai commencé avec Spring Boot.  Une BDD avec en relation 3 entités. Par défaut j'avais construit un front sous React-ts.
+Mais Angular est une stack que je voulais découvrir. assisté de Chatgpt 3.5 je développe cette API. Sauf que chatgpt n'est pas a jour sur Angular et j'apprends des erreurs, de mes recherches, de stack overflow. Il y a encore beaucoup de questions mais je commence a comprendre le fonctionnement d'Angular.
