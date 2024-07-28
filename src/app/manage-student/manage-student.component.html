@@ -1,0 +1,35 @@
+<div class="containerManager">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <mat-form-field>
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="name" name="name" required>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Prénom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="firstname" name="firstname" required>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Date de naissance</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="birthday" name="birthday" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <!-- Champ de fichier sans mat-form-field -->
+        <div>
+          <label>Photo</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+        <div *ngIf="photo">
+            <img [src]="'http://localhost:8080/uploads/images/' + photo" alt="Photo de l'étudiant">
+          </div>
+          <div *ngIf="!photo">
+            <p>Aucune photo disponible</p>
+          </div>
+        
+        <button mat-button type="submit">Valider</button>
+      </form>
+</div>

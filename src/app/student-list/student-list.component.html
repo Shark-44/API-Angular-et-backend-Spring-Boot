@@ -8,9 +8,9 @@
           <button (click)="handleDelStudent(student.idStudent)">X</button>
         </div>
         <div *ngIf="showManage" id="Manbutton">
-          <a ref="/ManageStudent">
-            <button>V</button>
-          </a>
+          <div *ngIf="showManage" id="Manbutton">
+            <button (click)="navigateToManageStudent(student.idStudent)">V</button>
+          </div>
         </div>
         <div class="details">
           <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">

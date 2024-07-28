@@ -27,13 +27,14 @@ export class StudentListComponent implements OnInit {
   showCreate: boolean = false;
   openPopoverId: number | null = null;
   isAdminLoggedIn: boolean = false;
+  idStudent: number | null = null;
 
   // Pour la création d'un student
   name: string = '';
   firstname: string = '';
   selectedFile: File | null = null;
   photo: string = '';
-  birthday: Date | null = null; // Ajout de la propriété 'birthday'
+  birthday: Date | null = null; 
 
   constructor(
     private studentService: StudentService, 
@@ -159,5 +160,8 @@ export class StudentListComponent implements OnInit {
     } else {
       popover.open(context);
     }
+  }
+  navigateToManageStudent(id: number) {
+    this.router.navigate(['/ManageStudent', id]);
   }
 }
