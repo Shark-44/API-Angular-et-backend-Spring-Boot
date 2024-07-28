@@ -1,42 +1,73 @@
 <div class="contenairStudient">
-  <div class="title">
-    <p>Liste des étudiants</p>
-  </div>
-  <div class="cardwrapper">
-    <div *ngFor="let student of listStudent; let i = index" [attr.key]="i" class="globalCard">
-      <div *ngIf="showDelete" id="delbutton">
-        <button (click)="handleDelStudent(student.idStudent)">X</button>
-      </div>
-      <div *ngIf="showManage" id="Manbutton">
-        <a ref="/ManageStudent">
-          <button>V</button>
-        </a>
-      </div>
-      <div class="details">
-        <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">
-        <p>Nom: {{ student.name }}</p>
-        <p>Prénom: {{ student.firstname }}</p>
-      </div>
-      <ng-template #popContent let-anniversaire="anniversaire" let-langages="langages">
-        L'anniversaire est le {{ anniversaire | date }}<br>
-        Langages : {{ langages }}
-      </ng-template>
-      <button
-      type="button"
-      class="btn btn-outline-secondary me-2"
-      placement="top"
-      [ngbPopover]="popContent"
-      [popoverClass]="'my-custom-popover'"
-      [popoverContext]="{ anniversaire: student.birthday, langages: getLangageNames(student) }">
-      Info
-    </button>
+    <div class="title">
+      <p>Liste des étudiants</p>
     </div>
-  </div>
-      <!-- Boutons d'administration affichés si l'administrateur est connecté -->
-      <div *ngIf="isAdminLoggedIn" class="admin-buttons">
-        <button (click)="createStudent()">Créer un étudiant</button>
-        <button (click)="toggleShowManage()">Modifier un étudiant</button>
-        <button (click)="toggleShowDelete()">Supprimer un étudiant</button>
+    <div class="cardwrapper">
+      <div *ngFor="let student of listStudent; let i = index" [attr.key]="i" class="globalCard">
+        <div *ngIf="showDelete" id="delbutton">
+          <button (click)="handleDelStudent(student.idStudent)">X</button>
+        </div>
+        <div *ngIf="showManage" id="Manbutton">
+          <a ref="/ManageStudent">
+            <button>V</button>
+          </a>
+        </div>
+        <div class="details">
+          <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">
+          <p>Nom: {{ student.name }}</p>
+          <p>Prénom: {{ student.firstname }}</p>
+        </div>
+        <ng-template #popContent let-anniversaire="anniversaire" let-langages="langages">
+          L'anniversaire est le {{ anniversaire | date }}<br>
+          Langages : {{ langages }}
+        </ng-template>
+        <button
+        type="button"
+        class="btn btn-outline-secondary me-2"
+        placement="top"
+        [ngbPopover]="popContent"
+        [popoverClass]="'my-custom-popover'"
+        [popoverContext]="{ anniversaire: student.birthday, langages: getLangageNames(student) }">
+        Info
+      </button>
       </div>
+    </div>
+    <!-- Boutons d'administration affichés si l'administrateur est connecté -->
+    <div *ngIf="isAdminLoggedIn" class="admin-buttons">
+      <button (click)="toggleShowCreateStudent()">Créer un étudiant</button>
+      <button (click)="toggleShowManage()">Modifier un étudiant</button>
+      <button (click)="toggleShowDelete()">Supprimer un étudiant</button>
+    </div>
+    <div *ngIf="showCreate" id="Manbutton">
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <mat-form-field>
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="name" name="name" required>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Prénom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="firstname" name="firstname" required>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-label>Date de naissance</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="birthday" name="birthday" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <!-- Champ de fichier sans mat-form-field -->
+        <div>
+          <label>Photo</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+        
+        <button mat-button type="submit">Valider</button>
+      </form>
+    </div>
+    
+  
   </div>
   

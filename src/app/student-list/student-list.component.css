@@ -39,6 +39,8 @@
     background-color: rgb(44, 41, 41);
     color: white;
     padding: 10px;
+    margin: 10px;
+    font-size: larger;
 }
 ::ng-deep .my-custom-popover .popover-body {
     padding: 20px;
@@ -57,4 +59,14 @@
 }
 #delbutton button {
     background: red;
+}
+.admin-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+   
+}
+
+.admin-buttons button {
+    font-size: 1em;
 }

@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StudentService } from '../services/student.service';
 import { Student } from '../models/student.model';
-import { NgbPopover, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopoverModule, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgForm, FormsModule } from '@angular/forms';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [NgIf, NgForOf, CommonModule, NgbPopoverModule],
+  providers: [provideNativeDateAdapter()],
+  imports: [NgIf, NgForOf, CommonModule, NgbPopoverModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, FormsModule],
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css']
 })
@@ -18,13 +24,22 @@ export class StudentListComponent implements OnInit {
   listStudent: Student[] = [];
   showDelete: boolean = false;
   showManage: boolean = false;
+  showCreate: boolean = false;
   openPopoverId: number | null = null;
   isAdminLoggedIn: boolean = false;
+
+  // Pour la création d'un student
+  name: string = '';
+  firstname: string = '';
+  selectedFile: File | null = null;
+  photo: string = '';
+  birthday: Date | null = null; // Ajout de la propriété 'birthday'
 
   constructor(
     private studentService: StudentService, 
     private router: Router,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchStudents();
@@ -33,18 +48,80 @@ export class StudentListComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  onSubmit(form: NgForm) {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      this.http.post('http://localhost:8080/api/files/upload', formData, {
+        headers: { 'Accept': 'application/json' },
+        responseType: 'text', 
+      }).subscribe({
+        next: (response: string) => {
+          // Extraire le nom du fichier de la réponse texte
+          const photoFileName = response.split('File uploaded successfully: ')[1];
+          this.createStudent(photoFileName);
+        },
+        error: (error) => {
+          console.error('Error uploading file:', error);
+        }
+      });
+    } else {
+      this.createStudent(null);
+    }
+  }
+
+  createStudent(photoFileName: string | null) {
+    const studentData = {
+      name: this.name,
+      firstname: this.firstname,
+      birthday: this.birthday, // Assurez-vous que 'birthday' est bien du type Date ou string
+      photo: photoFileName
+    };
+
+    this.http.post('http://localhost:8080/api/students', studentData, {
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    }).subscribe({
+      next: (response) => {
+        console.log('Student created:', response);
+        this.resetForm();
+        this.fetchStudents(); 
+        this.showCreate = false;
+      },
+      error: (error) => {
+        console.error('Error creating student:', error);
+      }
+    });
+  }
+
+  resetForm() {
+    this.name = '';
+    this.firstname = '';
+    this.birthday = null;
+    this.selectedFile = null;
+  }
+
   fetchStudents(): void {
     this.studentService.getStudents().subscribe((students: Student[]) => {
       this.listStudent = students;
     });
   }
 
+  getLangageNames(student: Student): string {
+    return student.langages.map(langage => langage.nameLangage).join(', ');
+  }
+
   handleDelStudent(id: number) {
     this.studentService.deleteStudent(id).subscribe({
       next: () => {
-        // Supprimer l'étudiant de la liste locale
         this.listStudent = this.listStudent.filter(student => student.idStudent !== id);
-        // Afficher une notification de succès
         alert('Étudiant supprimé avec succès.');
       },
       error: (err) => {
@@ -53,39 +130,29 @@ export class StudentListComponent implements OnInit {
       }
     });
   }
-  
-  createStudent() {
-    // Logique pour créer un étudiant
+
+  toggleShowCreateStudent() {
+    this.showCreate = !this.showCreate;
+    this.showDelete = false;
+    this.showManage = false;
   }
 
   toggleShowManage() {
     this.showManage = !this.showManage;
+    this.showCreate = false;
     this.showDelete = false;
   }
 
   toggleShowDelete() {
     this.showDelete = !this.showDelete;
+    this.showCreate = false;
     this.showManage = false;
-  }
-  togglePopover(studentId: number): void {
-    if (this.openPopoverId === studentId) {
-      this.openPopoverId = null; 
-    } else {
-      this.openPopoverId = studentId; 
-    }
-  }
-
-  isPopoverOpen(studentId: number): boolean {
-    return this.openPopoverId === studentId;
   }
 
   formatDate(date: Date): string {
     return new Date(date).toLocaleDateString();
   }
 
-  getLangageNames(student: Student): string {
-    return student.langages.map(langage => langage.nameLangage).join(', ');
-  }
   toggleWithGreeting(popover: NgbPopover, context: { anniversaire: Date, greeting: string }) {
     if (popover.isOpen()) {
       popover.close();
