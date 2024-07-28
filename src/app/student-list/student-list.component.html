@@ -1,4 +1,8 @@
-<div class="carddetail">
+<div class="contenairStudient">
+  <div class="title">
+    <p>Liste des étudiants</p>
+  </div>
+  <div class="cardwrapper">
     <div *ngFor="let student of listStudent; let i = index" [attr.key]="i" class="globalCard">
       <div *ngIf="showDelete" id="delbutton">
         <button (click)="handleDelStudent(student.idStudent)">X</button>
@@ -13,12 +17,20 @@
         <p>Nom: {{ student.name }}</p>
         <p>Prénom: {{ student.firstname }}</p>
       </div>
-      <div *ngIf="isPopoverOpen(student.idStudent)" class="popover-content">
-        <div class="px-1 py-2">
-          <div class="text-small font-bold">Anniversaire: {{ formatDate(student.birthday) }}</div>
-          <p>Langages étudiés: {{ getLangageNames(student) }}</p>
-        </div>
-      </div>
+      <ng-template #popContent let-anniversaire="anniversaire" let-langages="langages">
+        L'anniversaire est le {{ anniversaire | date }}<br>
+        Langages : {{ langages }}
+      </ng-template>
+      <button
+      type="button"
+      class="btn btn-outline-secondary me-2"
+      placement="top"
+      [ngbPopover]="popContent"
+      [popoverClass]="'my-custom-popover'"
+      [popoverContext]="{ anniversaire: student.birthday, langages: getLangageNames(student) }">
+      Info
+    </button>
     </div>
+  </div>
   </div>
   

@@ -41,3 +41,5 @@ Mais Angular est une stack que je voulais découvrir. assisté de Chatgpt 3.5 je
 
 5) Réalisé une connexion admin avec retour backend. La toggle-bar de connexion garde l'état au changement de page.
 Compris utilisation de Angular/material.
+
+6) Dans la page student list modification pour avoir popover et l'utilisation de ng-bootstrap

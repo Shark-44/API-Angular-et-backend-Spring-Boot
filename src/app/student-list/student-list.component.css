@@ -1,12 +1,27 @@
-.carddetail {
+.contenairStudient {
+    display: flex;
+  flex-direction: column;
+    gap: 20px;
+}
+.contenairStudient .title {
+    background-color: rgb(231, 189, 85);
+    border: 5px solid rgb(114, 85, 10);
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+    position: relative;
+    top: -30px;
+}
+.cardwrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 .globalCard{
+
     text-align: center;
 }
-.carddetail .details {
+.globalCard .details {
     background-color: bisque;
     width: 250px;
     text-align: center;
@@ -15,16 +30,20 @@
     border-radius: 10px;
 }
 
-.carddetail .details img {
+.globalCard .details img {
     width: 200px;
     height: 200px;
     border-radius: 10px;
 }
-.py-2 {
+.me-2{
     background-color: rgb(44, 41, 41);
     color: white;
     padding: 10px;
 }
+::ng-deep .my-custom-popover .popover-body {
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
 .capitalize {
     position: relative;
     top: 10px;

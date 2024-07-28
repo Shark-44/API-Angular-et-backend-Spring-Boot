@@ -4,11 +4,12 @@ import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StudentService } from '../services/student.service';
 import { Student } from '../models/student.model';
+import { NgbPopover, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [NgIf, NgForOf, CommonModule],
+  imports: [NgIf, NgForOf, CommonModule, NgbPopoverModule],
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css']
 })
@@ -52,5 +53,12 @@ export class StudentListComponent implements OnInit {
 
   getLangageNames(student: Student): string {
     return student.langages.map(langage => langage.nameLangage).join(', ');
+  }
+  toggleWithGreeting(popover: NgbPopover, context: { anniversaire: Date, greeting: string }) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open(context);
+    }
   }
 }
