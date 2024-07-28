@@ -31,7 +31,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Ce projet suit ce travail que j'ai commencé avec Spring Boot.  Une BDD avec en relation 3 entités. Par défaut j'avais construit un front sous React-ts.
 Mais Angular est une stack que je voulais découvrir. assisté de Chatgpt 3.5 je développe cette API. Sauf que chatgpt n'est pas a jour sur Angular et j'apprends des erreurs, de mes recherches, de stack overflow. Il y a encore beaucoup de questions mais je commence a comprendre le fonctionnement d'Angular.
 
-1 comprendre l'architecture
-2 afficher la page home
-3 realiser en header ma toggle-bar pour une connexion
-4 rediriger sur student-list et faire mon 1er get
+1) comprendre l'architecture
+
+2) afficher la page home
+
+3) realiser en header ma toggle-bar pour une connexion
+
+4) rediriger sur student-list et faire mon 1er get
+
+5) Réalisé une connexion admin avec retour backend. La toggle-bar de connexion garde l'état au changement de page.
+Compris utilisation de Angular/material.

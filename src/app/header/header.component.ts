@@ -1,5 +1,10 @@
+// header.component.ts
 import { NgClass, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +13,39 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [NgClass, NgIf]
 })
-export class AppHeaderComponent {
+export class AppHeaderComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
 
-  login() {
-    this.isAdminLoggedIn = true;
+  constructor(
+    private dialog: MatDialog,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(loggedIn => {
+      this.isAdminLoggedIn = loggedIn;
+    });
+  }
+
+  openLoginModal() {
+    const dialogRef = this.dialog.open(LoginModalComponent);
+    dialogRef.afterClosed().subscribe(success => {
+      if (success) {
+        this.authService.setLoggedIn(true);
+      }
+    });
   }
 
   logout() {
-    this.isAdminLoggedIn = false;
+    this.http.get('http://localhost:8080/logout', {})
+      .subscribe(
+        () => {
+          this.authService.setLoggedIn(false);
+        },
+        (error: any) => {
+          console.error('Erreur de déconnexion', error);
+        }
+      );
   }
 }

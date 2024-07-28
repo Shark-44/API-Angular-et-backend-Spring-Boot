@@ -5,14 +5,14 @@
       <div class="toggle-bar">
         <!-- Bouton Login -->
         <button 
-          [ngClass]="{'btn-grey': isAdminLoggedIn, 'btn-green': !isAdminLoggedIn}" 
-          (click)="login()">
+          [ngClass]="{'btn-grey': !isAdminLoggedIn, 'btn-green': isAdminLoggedIn}" 
+          (click)="openLoginModal()">
           Login
         </button>
 
         <!-- Bouton Logout -->
         <button 
-          [ngClass]="{'btn-grey': !isAdminLoggedIn, 'btn-red': isAdminLoggedIn}" 
+          [ngClass]="{'btn-grey': isAdminLoggedIn, 'btn-red': !isAdminLoggedIn}" 
           (click)="logout()">
           Logout
         </button>
