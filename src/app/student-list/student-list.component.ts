@@ -5,6 +5,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StudentService } from '../services/student.service';
 import { Student } from '../models/student.model';
 import { NgbPopover, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-student-list',
@@ -18,11 +19,18 @@ export class StudentListComponent implements OnInit {
   showDelete: boolean = false;
   showManage: boolean = false;
   openPopoverId: number | null = null;
+  isAdminLoggedIn: boolean = false;
 
-  constructor(private studentService: StudentService, private router: Router) {}
+  constructor(
+    private studentService: StudentService, 
+    private router: Router,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     this.fetchStudents();
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isAdminLoggedIn = isLoggedIn;
+    });
   }
 
   fetchStudents(): void {
@@ -31,15 +39,39 @@ export class StudentListComponent implements OnInit {
     });
   }
 
-  handleDelStudent(idStudent: number): void {
-    // Logic to delete the student
+  handleDelStudent(id: number) {
+    this.studentService.deleteStudent(id).subscribe({
+      next: () => {
+        // Supprimer l'étudiant de la liste locale
+        this.listStudent = this.listStudent.filter(student => student.idStudent !== id);
+        // Afficher une notification de succès
+        alert('Étudiant supprimé avec succès.');
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression de l\'étudiant :', err);
+        alert('Erreur lors de la suppression de l\'étudiant.');
+      }
+    });
+  }
+  
+  createStudent() {
+    // Logique pour créer un étudiant
   }
 
+  toggleShowManage() {
+    this.showManage = !this.showManage;
+    this.showDelete = false;
+  }
+
+  toggleShowDelete() {
+    this.showDelete = !this.showDelete;
+    this.showManage = false;
+  }
   togglePopover(studentId: number): void {
     if (this.openPopoverId === studentId) {
-      this.openPopoverId = null; // Ferme le popover s'il est déjà ouvert
+      this.openPopoverId = null; 
     } else {
-      this.openPopoverId = studentId; // Ouvre le popover pour cet étudiant
+      this.openPopoverId = studentId; 
     }
   }
 

@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routes';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { AppHeaderComponent } from './header/header.component';
+import { AppFooterComponent } from './footer/footer.component';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthService } from './services/auth.service';
     AppComponent,
     HomeComponent,
     LoginModalComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,5 +32,11 @@
     </button>
     </div>
   </div>
+      <!-- Boutons d'administration affichés si l'administrateur est connecté -->
+      <div *ngIf="isAdminLoggedIn" class="admin-buttons">
+        <button (click)="createStudent()">Créer un étudiant</button>
+        <button (click)="toggleShowManage()">Modifier un étudiant</button>
+        <button (click)="toggleShowDelete()">Supprimer un étudiant</button>
+      </div>
   </div>
   
