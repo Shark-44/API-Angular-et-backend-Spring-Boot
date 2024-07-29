@@ -1,4 +1,5 @@
 <div class="containerManager">
+    <h2>Mise a jour fiche étudiant</h2>
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
         <mat-form-field>
           <mat-label>Nom d'utilisateur</mat-label>
@@ -32,4 +33,30 @@
         
         <button mat-button type="submit">Valider</button>
       </form>
+      <div *ngIf="!isEnrolledInSchool">
+        <h3>Inscrire l'étudiant dans une école</h3>
+        <mat-form-field>
+          <mat-label>Choisir une école</mat-label>
+          <mat-select [(ngModel)]="favoriteSchool">
+            <mat-option *ngFor="let school of listSchool" [value]="school.idSchool">
+              {{school.nameSchool}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSchoolSubmit()">Inscrire</button>
+      </div>
+      
+      <div *ngIf="isEnrolledInSchool">
+        <h3>École actuelle</h3>
+        <p>{{getCurrentSchoolName()}}</p>
+        <button mat-raised-button color="primary" (click)="changeSchool()">Changer d'école</button>
+      
+        <h3>Langages disponibles</h3>
+        <mat-checkbox *ngFor="let langage of listLangage" 
+                      (change)="handleLangageChange(langage.idLangage)"
+                      [checked]="isLangageSelected(langage.idLangage)">
+          {{langage.nameLangage}}
+        </mat-checkbox>
+        <button mat-raised-button color="primary" (click)="handleLangageSubmit()">Mettre à jour les langages</button>
+      </div>
 </div>
