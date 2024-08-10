@@ -1,0 +1,19 @@
+<div class="containerResult">
+    <mat-form-field>
+        <mat-label>Choisir une école</mat-label>
+        <mat-select [(ngModel)]="selectSchool" (ngModelChange)="onSchoolSelect($event)">
+          <mat-option *ngFor="let school of listSchool" [value]="school.idSchool">
+            {{school.nameSchool}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="studentAverages.length > 0">
+        <h3>Moyennes  générales des élèves</h3>
+        <ul>
+          <li *ngFor="let student of studentAverages">
+            {{student.studentName}}: {{student.average | number:'1.1-2'}}
+          </li>
+        </ul>
+      </div>
+</div>

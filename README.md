@@ -45,3 +45,4 @@ Compris utilisation de Angular/material.
 6) Dans la page student list modification pour avoir popover et l'utilisation de ng-bootstrap
 
 7) J'ai enfin fait toutes les opérations CRUD pour la class student et pris en compte les liaisons entre entités qui sont parfois manytomany ou onetomany. Pour le fun je vais completer cette api pour les tables ecole et langage.
+j'ai ajouté un dump de ma bdd dans ce projet

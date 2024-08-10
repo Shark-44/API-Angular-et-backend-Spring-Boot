@@ -20,6 +20,7 @@
         </mat-form-field>
         
         <!-- Champ de fichier sans mat-form-field -->
+        <div class="photo">
         <div>
           <label>Photo</label>
           <input type="file" (change)="onFileSelected($event)">
@@ -30,7 +31,7 @@
           <div *ngIf="!photo">
             <p>Aucune photo disponible</p>
           </div>
-        
+        </div>
         <button mat-button type="submit">Valider</button>
       </form>
       <div *ngIf="!isEnrolledInSchool">
@@ -46,7 +47,7 @@
         <button mat-raised-button color="primary" (click)="onSchoolSubmit()">Inscrire</button>
       </div>
       
-      <div *ngIf="isEnrolledInSchool">
+      <div *ngIf="isEnrolledInSchool" id="fin">
         <h3>École actuelle</h3>
         <p>{{getCurrentSchoolName()}}</p>
         <button mat-raised-button color="primary" (click)="changeSchool()">Changer d'école</button>
@@ -55,7 +56,7 @@
         <mat-checkbox *ngFor="let langage of listLangage" 
                       (change)="handleLangageChange(langage.idLangage)"
                       [checked]="isLangageSelected(langage.idLangage)">
-          {{langage.nameLangage}}
+          <span id="test">{{langage.nameLangage}}</span>
         </mat-checkbox>
         <button mat-raised-button color="primary" (click)="handleLangageSubmit()">Mettre à jour les langages</button>
       </div>

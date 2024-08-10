@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
+import { Component } from '@angular/core';
 
-@NgModule({
-  declarations: [HeaderComponent],
-  imports: [CommonModule],
-  exports: [HeaderComponent]
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  imports: [],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
-export class HeaderModule { }
+export class AppHeaderComponent {}

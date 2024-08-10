@@ -2,3 +2,42 @@ form img {
     width: 200px;
     height: 250px;
 }
+.containerManager {
+    margin-top: 40%;
+}
+.containerManager h2{
+    margin-top: 10%;
+    border-bottom: 5px solid red;
+}
+mat-form-field {
+    margin: 20px;
+}
+.photo {    
+    display: flex;
+    width: 70vw;
+
+}
+.containerManager button {
+    margin-left: 80%;
+    font-size: larger;
+    width: 200px;
+    
+}
+.containerManager h3{
+    margin-top: 2%;
+    padding-top: 2%;
+    border-top: 5px solid red;
+}
+
+.containerManager p {
+    color: red;
+    margin: 1px 0 .75em 5em;
+    font-size: x-large;
+}
+#test {
+    font-size: 2em;
+}
+
+#fin {
+    margin-bottom: 50px;
+}
