@@ -7,13 +7,38 @@
           </mat-option>
         </mat-select>
     </mat-form-field>
-
+    <div *ngIf="studentNotations.length > 0">
+      <h3>Notes des élèves par langage</h3>
+      <table>
+        <thead>
+          <tr style="background-color: red;">
+            <th>Élève</th>
+            <th *ngFor="let langage of langages">{{langage.nameLangage}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of studentNotations">
+            <td>{{student.studentName}}</td>
+            <td *ngFor="let langage of langages" style="background: white;">
+              <ng-container *ngIf="student.notations[langage.nameLangage] && student.notations[langage.nameLangage].length > 0">
+                <ng-container *ngFor="let note of student.notations[langage.nameLangage]">
+                  {{note | number:'1.1-2'}}<ng-container *ngIf="note !== student.notations[langage.nameLangage][student.notations[langage.nameLangage].length - 1]">, </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="!student.notations[langage.nameLangage] || student.notations[langage.nameLangage].length === 0">-</ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div *ngIf="studentAverages.length > 0">
         <h3>Moyennes  générales des élèves</h3>
         <ul>
           <li *ngFor="let student of studentAverages">
-            {{student.studentName}}: {{student.average | number:'1.1-2'}}
+            <span class="student-name">{{student.studentName}}</span>: 
+            <span class="student-average">{{student.average | number:'1.1-2'}}</span>
           </li>
         </ul>
       </div>
+
 </div>

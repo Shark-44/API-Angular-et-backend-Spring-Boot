@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { SchoolService } from "../services/school.service";
 import { NotationService } from "../services/notation.service";
-import { School } from "../models/school.model";
-import { Student } from "../models/student.model";
+import { LangageService } from "../services/langage.service";
+
+import { School, NotationGroup, Langage, StudentAverage, StudentNotations } from "../models/models";
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,11 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, NgForOf, NgIf } from '@angular/common';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
-export interface StudentAverage {
-    studentId: number;
-    studentName: string;
-    average: number;
-  }
+
 
 @Component({
     selector: 'app-result',
@@ -37,14 +35,19 @@ export class ResultComponent implements OnInit {
     listSchool: School[] = [];
     selectSchool: number | undefined;
     studentAverages: StudentAverage[] = [];
+    studentNotations: StudentNotations[] = [];
+    langages: Langage[] = [];
 
     constructor(
         private schoolService: SchoolService,
-        private notationService: NotationService
+        private notationService: NotationService,
+        private langageService: LangageService
+
     ) {}
 
     ngOnInit(): void {
         this.fetchSchools();
+        this.fetchLangages()
     }
 
     fetchSchools(): void {
@@ -56,6 +59,7 @@ export class ResultComponent implements OnInit {
     onSchoolSelect(schoolId: number): void {
         console.log('Selected school ID:', schoolId);
         this.fetchStudentAverages(schoolId);
+        this.fetchStudentNotations(schoolId);
     }
 
     fetchStudentAverages(schoolId: number): void {
@@ -68,5 +72,54 @@ export class ResultComponent implements OnInit {
             console.error('Error fetching student averages:', error);
           }
         );
+      }
+      // step 2
+      fetchLangages(): void {
+        this.langageService.getLangages().subscribe((langages: Langage[]) => {
+          this.langages = langages;
+        });
+      }
+    
+    
+      fetchStudentNotations(schoolId: number): void {
+        this.notationService.getNotationsBySchoolId(schoolId).subscribe(
+          (notationGroups: NotationGroup[]) => {
+            this.processNotations(notationGroups);
+          },
+          (error) => {
+            console.error('Error fetching student notations:', error);
+          }
+        );
+      }
+
+      processNotations(notationGroups: NotationGroup[]): void {
+        const studentNotationsMap = new Map<number, StudentNotations>();
+        const langagesSet = new Set<string>();
+      
+        notationGroups.forEach(group => {
+          langagesSet.add(group.langageName);
+      
+          if (!studentNotationsMap.has(group.studentId)) {
+            studentNotationsMap.set(group.studentId, {
+              studentId: group.studentId,
+              studentName: group.studentName,
+              notations: {}
+            });
+          }
+      
+          const studentNotation = studentNotationsMap.get(group.studentId)!;
+      
+          if (!studentNotation.notations[group.langageName]) {
+            studentNotation.notations[group.langageName] = [];
+          }
+      
+          // Ajouter toutes les notes individuelles pour ce langage
+          group.notes.forEach(note => {
+            studentNotation.notations[group.langageName].push(note.note);
+          });
+        });
+      
+        this.studentNotations = Array.from(studentNotationsMap.values());
+        this.langages = Array.from(langagesSet).map(name => ({ nameLangage: name, idLangage: 0 }));
       }
     }

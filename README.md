@@ -26,6 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 # API-Angular-et-backend-Spring-Boot
+-------------------------------------
+# Rappel pour tester ce frontend
+1- Dans un premier temps "npm install" pour les dépendances
+2- Ensuite lancer avec "ng serve"
+3- le backend https://github.com/Shark-44/1erbackendJava et n'oubliez pas le dump.sql fait via MySQL
 
 -------------------------------------
 Ce projet suit ce travail que j'ai commencé avec Spring Boot.  Une BDD avec en relation 3 entités. Par défaut j'avais construit un front sous React-ts.
@@ -46,3 +51,5 @@ Compris utilisation de Angular/material.
 
 7) J'ai enfin fait toutes les opérations CRUD pour la class student et pris en compte les liaisons entre entités qui sont parfois manytomany ou onetomany. Pour le fun je vais completer cette api pour les tables ecole et langage.
 j'ai ajouté un dump de ma bdd dans ce projet
+a) la premiere etape etait de donner la moyenne generale
+b) la seconde fut d'afficher sous forme de tableau toutes les notes
