@@ -1,7 +1,8 @@
 .contenairStudient {
     display: flex;
-  flex-direction: column;
+    flex-direction: column;
     gap: 20px;
+    align-items: center;
 }
 .contenairStudient .title {
     background-color: rgb(231, 189, 85);
@@ -9,18 +10,31 @@
     border-radius: 20px;
     text-align: center;
     color: black;
-    position: relative;
-    top: -30px;
+    margin-top: 25vh;
+    width: 90%;
+}
+
+.contenairStudient .title p {
+    margin: 10px;
+    font-weight: 700;
+    letter-spacing: 3.48px;
+    font-size: 26px;
 }
 .cardwrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
 }
 .globalCard{
-
-    text-align: center;
+    position: relative;
+    width: 200px; 
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .globalCard .details {
     background-color: bisque;
     width: 250px;
@@ -35,6 +49,22 @@
     height: 200px;
     border-radius: 10px;
 }
+
+#delbutton {
+    position: absolute;
+    top: 20px; 
+    right: 10px; 
+}
+
+#manbutton {
+    position: absolute;
+    top: -20px; 
+    right: 100px; 
+}
+#delbutton button {
+    background: red;
+}
+
 .me-2{
     background-color: rgb(44, 41, 41);
     color: white;
@@ -46,27 +76,38 @@
     padding: 20px;
     background-color: #f0f0f0;
   }
-.capitalize {
-    position: relative;
-    top: 10px;
-    background: rgb(93, 224, 163);
-}
-#delbutton {
-    position: relative;
-    position: relative;
-    top: 15%;
-    right: -35%;
-}
-#delbutton button {
-    background: red;
-}
+
+
 .admin-buttons {
     display: flex;
     justify-content: space-around;
-    margin-top: 10px;
-   
+    width: 100%;
 }
 
 .admin-buttons button {
     font-size: 1em;
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#cardCreate {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+   }
+
+#cardCreate .field {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#cardCreate button {
+    margin-left: 80%;
+    padding: 5px;
+    font-size: 1.1em;
+}
+#photo {
+    display: flex;
+    gap: 10px;
 }

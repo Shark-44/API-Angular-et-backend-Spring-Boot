@@ -7,11 +7,9 @@
         <div *ngIf="showDelete" id="delbutton">
           <button (click)="handleDelStudent(student.idStudent)">X</button>
         </div>
-        <div *ngIf="showManage" id="Manbutton">
-          <div *ngIf="showManage" id="Manbutton">
-            <button (click)="navigateToManageStudent(student.idStudent)">V</button>
-          </div>
-        </div>
+        <div *ngIf="showManage" id="manbutton">
+          <button (click)="navigateToManageStudent(student.idStudent)">V</button>
+        </div>       
         <div class="details">
           <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">
           <p>Nom: {{ student.name }}</p>
@@ -22,14 +20,14 @@
           Langages : {{ langages }}
         </ng-template>
         <button
-        type="button"
-        class="btn btn-outline-secondary me-2"
-        placement="top"
-        [ngbPopover]="popContent"
-        [popoverClass]="'my-custom-popover'"
-        [popoverContext]="{ anniversaire: student.birthday, langages: getLangageNames(student) }">
-        Info
-      </button>
+          type="button"
+          class="btn btn-outline-secondary me-2"
+          placement="top"
+          [ngbPopover]="popContent"
+          [popoverClass]="'my-custom-popover'"
+          [popoverContext]="{ anniversaire: student.birthday, langages: getLangageNames(student) }">
+          Info
+        </button>
       </div>
     </div>
     <!-- Boutons d'administration affichés si l'administrateur est connecté -->
@@ -38,19 +36,19 @@
       <button (click)="toggleShowManage()">Modifier un étudiant</button>
       <button (click)="toggleShowDelete()">Supprimer un étudiant</button>
     </div>
-    <div *ngIf="showCreate" id="Manbutton">
+    <div *ngIf="showCreate" id="cardCreate">
       <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <mat-form-field>
+        <mat-form-field class="field">
           <mat-label>Nom d'utilisateur</mat-label>
           <input matInput [(ngModel)]="name" name="name" required>
         </mat-form-field>
         
-        <mat-form-field>
+        <mat-form-field class="field">
           <mat-label>Prénom d'utilisateur</mat-label>
           <input matInput [(ngModel)]="firstname" name="firstname" required>
         </mat-form-field>
         
-        <mat-form-field>
+        <mat-form-field class="field">
           <mat-label>Date de naissance</mat-label>
           <input matInput [matDatepicker]="picker" [(ngModel)]="birthday" name="birthday" required>
           <mat-hint>MM/DD/YYYY</mat-hint>
@@ -59,7 +57,7 @@
         </mat-form-field>
         
         <!-- Champ de fichier sans mat-form-field -->
-        <div>
+        <div id="photo">
           <label>Photo</label>
           <input type="file" (change)="onFileSelected($event)">
         </div>

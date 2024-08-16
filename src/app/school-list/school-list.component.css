@@ -1,0 +1,113 @@
+.contenairSchool {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.contenairSchool .title {
+    background-color: rgb(231, 189, 85);
+    border: 5px solid rgb(114, 85, 10);
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+    margin-top: 25vh;
+    width: 90%;
+}
+
+.contenairSchool .title p {
+    margin: 10px;
+    font-weight: 700;
+    letter-spacing: 3.48px;
+    font-size: 26px;
+}
+.cardwrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.globalCard{
+    position: relative;
+    width: 200px; 
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.globalCard .details {
+    background-color: bisque;
+    width: 250px;
+    text-align: center;
+    padding-top: 25px;
+    border: 2px solid brown;
+    border-radius: 10px;
+}
+
+.globalCard .details img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+#delbutton {
+    position: absolute;
+    top: 20px; 
+    right: 10px; 
+}
+
+#manbutton {
+    position: absolute;
+    top: -20px; 
+    right: 100px; 
+}
+#delbutton button {
+    background: red;
+}
+
+.me-2{
+    background-color: rgb(44, 41, 41);
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    font-size: larger;
+}
+::ng-deep .my-custom-popover .popover-body {
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+
+
+.admin-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.admin-buttons button {
+    font-size: 1em;
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#cardCreate {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+   }
+
+#cardCreate .field {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#cardCreate button {
+    margin-left: 80%;
+    padding: 5px;
+    font-size: 1.1em;
+}
+#photo {
+    display: flex;
+    gap: 10px;
+}

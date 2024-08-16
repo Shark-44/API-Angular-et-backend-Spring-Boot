@@ -1,3 +1,9 @@
+.containerHome{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .containerHome .title {
     background-color: rgb(231, 189, 85);

@@ -1,1 +1,51 @@
-<p>school-list works!</p>
+<div class="contenairSchool">
+    <div class="title">
+        <p>Liste des écoles</p>
+    </div>
+    <div class="cardwrapper">
+        <div *ngFor="let school of listSchool; let i = index" [attr.key]="i" class="globalCard">
+          <div *ngIf="showDelete" id="delbutton">
+            <button (click)="handleDelSchool(school.idSchool)">X</button>
+          </div>
+          <div *ngIf="showManage" id="manbutton">
+            <button (click)="navigateToManageSchool(school.idSchool)">V</button>
+          </div>
+          <div class="details">
+            <img [src]="'http://localhost:8080/uploads/images/' + school.photoSchool" alt="Photo">
+            <p>Nom: {{ school.nameSchool }}</p>
+          </div>
+          <ng-template #popContent let-langages="langages">          
+            Langages : {{ langages }}
+          </ng-template>
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-2"
+            placement="top"
+            [ngbPopover]="popContent"
+            [popoverClass]="'my-custom-popover'"
+            [popoverContext]="{ langages: getLangageNames(school) }">
+            Info
+          </button>
+    </div>
+    <div *ngIf="isAdminLoggedIn" class="admin-buttons">
+        <button (click)="toggleShowCreateSchool()">Créer une école</button>
+        <button (click)="toggleShowManage()">Modifier un école</button>
+        <button (click)="toggleShowDelete()">Supprimer un école</button>
+    </div>
+    <div *ngIf="showCreate" id="cardCreate">
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+          <mat-form-field class="field">
+            <mat-label>Nom d'école</mat-label>
+            <input matInput [(ngModel)]="nameSchool" name="nameSchool" required>
+          </mat-form-field>
+                   
+          <!-- Champ de fichier sans mat-form-field -->
+          <div id="photo">
+            <label>Photo</label>
+            <input type="file" (change)="onFileSelected($event)">
+          </div>
+          
+          <button mat-button type="submit">Valider</button>
+        </form>
+    </div>   
+</div>
