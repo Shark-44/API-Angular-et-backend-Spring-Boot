@@ -1,0 +1,40 @@
+form img {
+    width: 200px;
+    height: 250px;
+}
+.contenairManageSchool {
+    margin-top: 10%;
+}
+.contenairManageSchool h2{
+    margin-top: 10%;
+    border-bottom: 5px solid red;
+}
+mat-form-field {
+    margin: 20px;
+}
+.photo {    
+    display: flex;
+    width: 70vw;
+
+}
+.contenairManageSchool button {
+    margin-left: 80%;
+    font-size: larger;
+    width: 200px;
+    
+}
+.contenairManageSchool h3{
+    margin-top: 2%;
+    padding-top: 2%;
+    border-top: 5px solid red;
+}
+
+.contenairManageSchool p {
+    color: red;
+    margin: 1px 0 .75em 5em;
+    font-size: x-large;
+}
+
+#fin {
+    margin-bottom: 50px;
+}

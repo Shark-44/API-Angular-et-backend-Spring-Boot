@@ -1,1 +1,51 @@
-<p>manage-school works!</p>
+<div class="contenairManageSchool">
+    <h2>Mise a jour fiche école</h2>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <mat-form-field>
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput [(ngModel)]="nameSchool" name="nameSchool" required>
+        </mat-form-field>
+             
+        <div class="photo">
+        <div>
+          <label>Photo</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+        <div *ngIf="photoSchool">
+            <img [src]="'http://localhost:8080/uploads/images/' + photoSchool" alt="Photo de l'école">
+          </div>
+          <div *ngIf="!photoSchool">
+            <p>Aucune photo disponible</p>
+          </div>
+        </div>
+        <button mat-button type="submit">Valider</button>
+      <div>
+        <h3>Langages associés à l'école</h3>
+        <ul>
+          <li *ngFor="let langage of associatedLangages">{{ langage.nameLangage }}</li>
+        </ul>
+      </div>
+  
+      <div>
+        <h3>Tous les langages disponibles</h3>
+        <mat-form-field>
+          <mat-label>Sélectionner des langages à associer</mat-label>
+          <mat-select [(ngModel)]="selectedLangages" name="selectedLangages" multiple>
+            <mat-option *ngFor="let langage of allLangages" [value]="langage.idLangage">
+              {{ langage.nameLangage }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button type="button" (click)="associateLangages()">Associer les langages sélectionnés</button>
+      </div>
+  
+      <div id="fin">
+        <h3>Ajouter un nouveau langage</h3>
+        <mat-form-field>
+          <mat-label>Nom du nouveau langage</mat-label>
+          <input matInput [(ngModel)]="newLangageName" name="newLangageName">
+        </mat-form-field>
+        <button mat-button type="button" (click)="addNewLangage()">Ajouter le nouveau langage</button>
+      </div>
+    </form>
+</div>
