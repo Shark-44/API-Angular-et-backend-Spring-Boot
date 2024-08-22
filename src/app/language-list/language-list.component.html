@@ -1,1 +1,10 @@
-<p>language-list works!</p>
+<div class="contenairLangage">
+    <div class="title">
+        <p>Liste des langages</p>
+    </div>
+    <div class="listlangage">
+        <ul>
+            <li *ngFor="let langage of Langages; let i = index" [attr.key]="i" class="listLangage">{{ langage.nameLangage }}</li>
+        </ul>
+    </div>
+</div>

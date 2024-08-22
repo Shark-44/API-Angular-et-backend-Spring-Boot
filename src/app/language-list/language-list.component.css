@@ -1,0 +1,29 @@
+.contenairLangage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.contenairLangage .title {
+    background-color: rgb(231, 189, 85);
+    border: 5px solid rgb(114, 85, 10);
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+    margin-top: 25vh;
+    width: 150%;
+}
+
+.contenairLangage .title p {
+    margin: 10px;
+    font-weight: 700;
+    letter-spacing: 3.48px;
+    font-size: 26px;
+}
+
+.listlangage {
+    border: 5px solid red;
+    border-radius: 20px;
+    padding: 40px;
+    background: white;
+}

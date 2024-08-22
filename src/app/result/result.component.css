@@ -1,3 +1,7 @@
+.containerResult {
+    margin-top: 20%;
+}
+
 .containerResult h3 {
     border-bottom: 2px solid red;
     margin-top: 20px;
