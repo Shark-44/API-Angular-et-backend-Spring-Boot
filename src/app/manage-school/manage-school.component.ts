@@ -10,6 +10,7 @@ import { NgFor, NgIf } from '@angular/common';
 
 import { SchoolService } from '../services/school.service';
 import { Langage } from '../models/school.model';
+import { environment } from '../environments/environment';
 
 
 
@@ -22,6 +23,7 @@ import { Langage } from '../models/school.model';
   styleUrl: './manage-school.component.css'
 })
 export class ManageSchoolComponent implements OnInit {
+  imageUrl = environment.imageUrl;
   nameSchool: string = '';
   photoSchool: string = '';
   IdSchool: number | null = null;
@@ -51,7 +53,7 @@ export class ManageSchoolComponent implements OnInit {
 
   loadSchoolData(id: number) {
     this.IdSchool =id;
-    this.http.get(`http://localhost:8080/api/schools/${id}`).subscribe({
+    this.http.get(`${environment.apiUrl}/schools/${id}`).subscribe({
       next: (school: any) => {
         this.nameSchool = school.nameSchool;
         this.photoSchool = school.photoSchool;
@@ -73,7 +75,7 @@ export class ManageSchoolComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-      this.http.post('http://localhost:8080/api/files/upload', formData, {
+      this.http.post(`${environment.apiUrl}/api/files/upload`, formData, {
         headers: { 'Accept': 'application/json' },
         responseType: 'text',
       }).subscribe({
@@ -100,7 +102,7 @@ export class ManageSchoolComponent implements OnInit {
       photoSchool: photoFileName
     };
   
-    this.http.put(`http://localhost:8080/api/schools/${this.IdSchool}`, schoolData, {
+    this.http.put(`${environment.apiUrl}/schools/${this.IdSchool}`, schoolData, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (response) => {
@@ -114,7 +116,7 @@ export class ManageSchoolComponent implements OnInit {
   // Partie langage associé ou non + ajout
 
   fetchAllLangages() {
-    this.http.get<Langage[]>('http://localhost:8080/api/langages').subscribe({
+    this.http.get<Langage[]>(`${environment.apiUrl}/api/langages`).subscribe({
       next: (data) => {
         this.allLangages = data;
       },
@@ -125,7 +127,7 @@ export class ManageSchoolComponent implements OnInit {
   }
 
   fetchSchoolLangages(id: number) {
-    this.http.get<Langage[]>(`http://localhost:8080/api/schools/${id}/langages`).subscribe({
+    this.http.get<Langage[]>(`${environment.apiUrl}/schools/${id}/langages`).subscribe({
       next: (data) => {
         this.associatedLangages = data;
       },
@@ -142,7 +144,7 @@ export class ManageSchoolComponent implements OnInit {
       return;
     }
 
-    this.http.put(`http://localhost:8080/api/schools/${this.IdSchool}/associate-langages`, this.selectedLangages, {
+    this.http.put(`${environment.apiUrl}/schools/${this.IdSchool}/associate-langages`, this.selectedLangages, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (response) => {
@@ -160,7 +162,7 @@ export class ManageSchoolComponent implements OnInit {
       return;
     }
 
-    this.http.post<Langage>('http://localhost:8080/api/langages', { name: this.newLangageName }, {
+    this.http.post<Langage>(`${environment.apiUrl}/langages`, { name: this.newLangageName }, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (newLangage) => {

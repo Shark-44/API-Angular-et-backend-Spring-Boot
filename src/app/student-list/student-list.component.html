@@ -11,7 +11,7 @@
           <button (click)="navigateToManageStudent(student.idStudent)">V</button>
         </div>       
         <div class="details">
-          <img [src]="'http://localhost:8080/uploads/images/' + student.photo" alt="Photo">
+          <img [src]="imageUrl +'/' + student.photo" alt="Photo">
           <p>Nom: {{ student.name }}</p>
           <p>Prénom: {{ student.firstname }}</p>
         </div>

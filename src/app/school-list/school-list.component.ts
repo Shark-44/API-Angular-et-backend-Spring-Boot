@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SchoolService} from '../services/school.service';
 import { School } from '../models/school.model';
 import { AuthService } from '../services/auth.service';
-
+import { environment } from '../environments/environment'; 
 
 @Component({
   selector: 'app-school-list',
@@ -20,6 +20,7 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './school-list.component.css'
 })
 export class SchoolListComponent implements OnInit {
+  imageUrl = environment.imageUrl;
   listSchool: School[] = [];
   showDelete: boolean = false;
   showManage: boolean = false;
@@ -65,7 +66,7 @@ export class SchoolListComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
-      this.http.post('http://localhost:8080/api/files/upload', formData, {
+      this.http.post(`${environment.apiUrl}/files/upload`, formData, {
         headers: { 'Accept': 'application/json' },
         responseType: 'text', 
       }).subscribe({
@@ -89,7 +90,7 @@ export class SchoolListComponent implements OnInit {
       photoSchool: photoFileName
     };
 
-    this.http.post('http://localhost:8080/api/schools', schoolData, {
+    this.http.post(`${environment.apiUrl}/schools`, schoolData, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (response) => {

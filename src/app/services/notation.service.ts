@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import {NotationGroup, StudentAverage } from '../models/models';
+import { environment } from '../environments/environment';
 
 
 
@@ -11,7 +12,7 @@ import {NotationGroup, StudentAverage } from '../models/models';
 })
 
 export class NotationService {
-  private apiUrl = 'http://localhost:8080/api/notations';
+  private apiUrl = `${environment.apiUrl}/notations`;
 
   constructor(private http: HttpClient) { }
 

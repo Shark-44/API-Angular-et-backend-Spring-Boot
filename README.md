@@ -53,3 +53,5 @@ Compris utilisation de Angular/material.
 j'ai ajouté un dump de ma bdd dans ce projet
 a) la premiere etape etait de donner la moyenne generale
 b) la seconde fut d'afficher sous forme de tableau toutes les notes
+
+8) Mise sous docker avec ma bdd sous mysql, mon backend sous sping boot. L'ensemble fonction mais une correction est necessaire. Une étape de plus ...

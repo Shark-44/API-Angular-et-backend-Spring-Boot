@@ -11,7 +11,7 @@
             <button (click)="navigateToManageSchool(school.idSchool)">V</button>
           </div>
           <div class="details">
-            <img [src]="'http://localhost:8080/uploads/images/' + school.photoSchool" alt="Photo">
+            <img [src]="imageUrl + '/' + school.photoSchool" alt="Photo">
             <p>Nom: {{ school.nameSchool }}</p>
           </div>
           <ng-template #popContent let-langages="langages">          

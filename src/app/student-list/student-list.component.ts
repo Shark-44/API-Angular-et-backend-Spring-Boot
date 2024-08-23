@@ -12,6 +12,8 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-student-list',
   standalone: true,
@@ -21,6 +23,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
+  imageUrl = environment.imageUrl;
   listStudent: Student[] = [];
   showDelete: boolean = false;
   showManage: boolean = false;
@@ -61,7 +64,7 @@ export class StudentListComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
-      this.http.post('http://localhost:8080/api/files/upload', formData, {
+      this.http.post(`${environment.apiUrl}/files/upload`, formData, {
         headers: { 'Accept': 'application/json' },
         responseType: 'text', 
       }).subscribe({
@@ -87,7 +90,7 @@ export class StudentListComponent implements OnInit {
       photo: photoFileName
     };
 
-    this.http.post('http://localhost:8080/api/students', studentData, {
+    this.http.post(`${environment.apiUrl}/students`, studentData, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (response) => {

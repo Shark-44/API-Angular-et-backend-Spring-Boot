@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgFor } from '@angular/common';
 
 import { Langage } from '../models/student.model';
+import { environment } from '../environments/environment'
 
 @Component({
   selector: 'app-language-list',
@@ -23,7 +24,7 @@ ngOnInit() {
 }
 
 fetchLangages() {
-  this.http.get<Langage[]>('http://localhost:8080/api/langages').subscribe({
+  this.http.get<Langage[]>(`${environment.apiUrl}/langages`).subscribe({
     next: (data) => {
       this.Langages = data;
     },

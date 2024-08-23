@@ -14,6 +14,7 @@ import { Langage } from '../models/school.model';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-manage-student',
@@ -35,6 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrls: ['./manage-student.component.css']
 })
 export class ManageStudentComponent implements OnInit {
+  imageUrl = environment.imageUrl;
   name: string = '';
   firstname: string = '';
   selectedFile: File | null = null;
@@ -63,7 +65,7 @@ export class ManageStudentComponent implements OnInit {
   }
 
   loadStudentData(id: number) {
-    this.http.get(`http://localhost:8080/api/students/${id}`).subscribe({
+    this.http.get(`${environment.apiUrl}/students/${id}`).subscribe({
       next: (student: any) => {
         this.name = student.name;
         this.firstname = student.firstname;
@@ -103,7 +105,7 @@ export class ManageStudentComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-      this.http.post('http://localhost:8080/api/files/upload', formData, {
+      this.http.post(`${environment.apiUrl}/files/upload`, formData, {
         headers: { 'Accept': 'application/json' },
         responseType: 'text',
       }).subscribe({
@@ -130,7 +132,7 @@ export class ManageStudentComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const id = +params['id'];
-      this.http.put(`http://localhost:8080/api/students/${id}/basic-info`, studentData, {
+      this.http.put(`${environment.apiUrl}/students/${id}/basic-info`, studentData, {
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       }).subscribe({
         next: (response) => {
@@ -153,7 +155,7 @@ export class ManageStudentComponent implements OnInit {
     if (this.favoriteSchool != null) {
       this.route.params.subscribe(params => {
         const id = +params['id'];
-        this.http.put(`http://localhost:8080/api/students/${id}/associate-school/${this.favoriteSchool}`, {})
+        this.http.put(`${environment.apiUrl}/students/${id}/associate-school/${this.favoriteSchool}`, {})
           .subscribe({
             next: (response) => {
               console.log('School associated:', response);
@@ -172,7 +174,7 @@ export class ManageStudentComponent implements OnInit {
 
   fetchSchoolLangages(schoolId: number | null | undefined) {
     if (schoolId != null) {
-      this.http.get<Langage[]>(`http://localhost:8080/api/schools/${schoolId}/langages`)
+      this.http.get<Langage[]>(`${environment.apiUrl}/schools/${schoolId}/langages`)
         .subscribe({
           next: (data) => {
             this.listLangage = data;
@@ -202,7 +204,7 @@ export class ManageStudentComponent implements OnInit {
   
       this.route.params.subscribe(params => {
         const id = +params['id'];
-        this.http.put(`http://localhost:8080/api/students/${id}/associate-langages`, null, { params: httpParams })
+        this.http.put(`${environment.apiUrl}/students/${id}/associate-langages`, null, { params: httpParams })
           .subscribe({
             next: (response) => {
               console.log('Langages associés:', response);

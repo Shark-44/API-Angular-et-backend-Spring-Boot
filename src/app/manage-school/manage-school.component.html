@@ -12,7 +12,7 @@
           <input type="file" (change)="onFileSelected($event)">
         </div>
         <div *ngIf="photoSchool">
-            <img [src]="'http://localhost:8080/uploads/images/' + photoSchool" alt="Photo de l'école">
+            <img [src]="imageUrl + photoSchool" alt="Photo de l'école">
           </div>
           <div *ngIf="!photoSchool">
             <p>Aucune photo disponible</p>

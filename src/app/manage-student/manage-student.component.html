@@ -26,7 +26,7 @@
           <input type="file" (change)="onFileSelected($event)">
         </div>
         <div *ngIf="photo">
-            <img [src]="'http://localhost:8080/uploads/images/' + photo" alt="Photo de l'étudiant">
+            <img [src]="imageUrl + photo" alt="Photo de l'étudiant">
           </div>
           <div *ngIf="!photo">
             <p>Aucune photo disponible</p>

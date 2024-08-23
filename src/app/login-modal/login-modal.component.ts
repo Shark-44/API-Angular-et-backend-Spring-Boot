@@ -25,7 +25,7 @@ export class LoginModalComponent {
   ) {}
 
   submit() {
-    this.http.post('http://localhost:8080/login', 
+    this.http.post('http://192.168.1.157:8080/login', 
       { username: this.username, password: this.password }, 
       { withCredentials: true,
         responseType: 'text'  }

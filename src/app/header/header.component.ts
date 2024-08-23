@@ -38,7 +38,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.http.get('http://localhost:8080/logout', {})
+    this.http.get('http://192.168.1.157:8080/logout', {})
       .subscribe(
         () => {
           this.authService.setLoggedIn(false);
