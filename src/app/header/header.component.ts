@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -38,14 +39,18 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.http.get('http://192.168.1.157:8080/logout', {})
-      .subscribe(
-        () => {
-          this.authService.setLoggedIn(false);
-        },
-        (error: any) => {
-          console.error('Erreur de déconnexion', error);
+    this.http.get(`${environment.apiUrl2}/logout`, { responseType: 'text'})
+    .subscribe(
+      (response: string) => {
+        console.log('Réponse de déconnexion:', response);
+        this.authService.setLoggedIn(false);
+      },
+      (error: any) => {
+        console.error('Erreur de déconnexion:', error);
+        if (error.error) {
+          console.error('Détails de l\'erreur:', error.error);
         }
-      );
+      }
+    );
   }
 }

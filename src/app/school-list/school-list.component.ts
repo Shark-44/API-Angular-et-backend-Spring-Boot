@@ -27,7 +27,6 @@ export class SchoolListComponent implements OnInit {
   showCreate: boolean = false;
   openPopoverId: number | null = null;
   isAdminLoggedIn: boolean = false;
-  
   nameSchool: string = '';
   selectedFile: File | null = null;
   photoSchool: string = '';
@@ -94,7 +93,7 @@ export class SchoolListComponent implements OnInit {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).subscribe({
       next: (response) => {
-        console.log('Student created:', response);
+        console.log('School created:', response);
         this.resetForm();
         this.fetchSchools(); 
         this.showCreate = false;

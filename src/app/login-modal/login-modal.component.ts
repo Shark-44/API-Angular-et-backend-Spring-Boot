@@ -5,28 +5,41 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../environments/environment'; 
 
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.css'],
   standalone: true,  
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule],
 })
 export class LoginModalComponent {
-  username: string = '';
-  password: string = '';
+  loginForm: FormGroup;
+  hidePassword = true;
 
+  
   constructor(
     private http: HttpClient,
     private dialogRef: MatDialogRef<LoginModalComponent>,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+    });
+  }
+
+
 
   submit() {
-    this.http.post('http://192.168.1.157:8080/login', 
-      { username: this.username, password: this.password }, 
+    if (this.loginForm.valid) {
+      const formValues = this.loginForm.value;
+    this.http.post(`${environment.apiUrl2}/login`, 
+    { username: formValues.username, password: formValues.password }, 
       { withCredentials: true,
         responseType: 'text'  }
     ).subscribe(
@@ -40,4 +53,5 @@ export class LoginModalComponent {
       }
     );
   }
+}
 }

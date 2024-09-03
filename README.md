@@ -31,6 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1- Dans un premier temps "npm install" pour les dépendances
 2- Ensuite lancer avec "ng serve"
 3- le backend https://github.com/Shark-44/1erbackendJava et n'oubliez pas le dump.sql fait via MySQL
+4- La variable d'environment est prevue pour fonctionner en localhost. Le angular.json est prevu pour un build prod.
 
 -------------------------------------
 Ce projet suit ce travail que j'ai commencé avec Spring Boot.  Une BDD avec en relation 3 entités. Par défaut j'avais construit un front sous React-ts.
@@ -54,4 +55,4 @@ j'ai ajouté un dump de ma bdd dans ce projet
 a) la premiere etape etait de donner la moyenne generale
 b) la seconde fut d'afficher sous forme de tableau toutes les notes
 
-8) Mise sous docker avec ma bdd sous mysql, mon backend sous sping boot. L'ensemble fonction mais une correction est necessaire. Une étape de plus ...
+8) Mise sous docker avec ma bdd sous mysql, mon backend sous sping boot. L'ensemble est fonctionnel en prod; demandez moi le lien a l'adresse joanny.bernardeau@gmail.com car je suis ne puis exposer un server maison.
