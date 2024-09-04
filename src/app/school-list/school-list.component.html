@@ -26,11 +26,12 @@
             [popoverContext]="{ langages: getLangageNames(school) }">
             Info
           </button>
+        </div>
     </div>
     <div *ngIf="isAdminLoggedIn" class="admin-buttons">
-        <button (click)="toggleShowCreateSchool()">Créer une école</button>
-        <button (click)="toggleShowManage()">Modifier un école</button>
-        <button (click)="toggleShowDelete()">Supprimer un école</button>
+      <button (click)="toggleShowCreateSchool()">Créer une école</button>
+      <button (click)="toggleShowManage()">Modifier un école</button>
+      <button (click)="toggleShowDelete()">Supprimer un école</button>
     </div>
     <div *ngIf="showCreate" id="cardCreate">
         <form (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -47,5 +48,6 @@
           
           <button mat-button type="submit">Valider</button>
         </form>
-    </div>   
+    </div> 
+  
 </div>

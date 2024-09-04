@@ -116,7 +116,7 @@ export class ManageSchoolComponent implements OnInit {
   // Partie langage associé ou non + ajout
 
   fetchAllLangages() {
-    this.http.get<Langage[]>(`${environment.apiUrl}/api/langages`).subscribe({
+    this.http.get<Langage[]>(`${environment.apiUrl}/langages`).subscribe({
       next: (data) => {
         this.allLangages = data;
       },

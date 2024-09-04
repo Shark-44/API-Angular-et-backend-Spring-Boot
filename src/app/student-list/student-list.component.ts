@@ -49,6 +49,11 @@ export class StudentListComponent implements OnInit {
     this.fetchStudents();
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isAdminLoggedIn = isLoggedIn;
+      if (!isLoggedIn) {
+        this.showCreate = false;
+        this.showManage = false;
+        this.showDelete = false;
+      }
     });
   }
 

@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 })
 export class AppHeaderComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
+ 
 
   constructor(
     private dialog: MatDialog,
@@ -39,7 +40,9 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.http.get(`${environment.apiUrl2}/logout`, { responseType: 'text'})
+    const logoutUrl = `${environment.apiUrl2}/logout`;
+    console.log('URL de déconnexion:', logoutUrl);
+    this.http.get(logoutUrl, { responseType: 'text' })
     .subscribe(
       (response: string) => {
         console.log('Réponse de déconnexion:', response);
@@ -52,5 +55,6 @@ export class AppHeaderComponent implements OnInit {
         }
       }
     );
-  }
+}
+
 }

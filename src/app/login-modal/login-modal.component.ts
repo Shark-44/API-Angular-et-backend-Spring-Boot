@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,7 +15,7 @@ import { environment } from '../environments/environment';
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.css'],
   standalone: true,  
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule, CommonModule],
 })
 export class LoginModalComponent {
   loginForm: FormGroup;

@@ -41,6 +41,11 @@ export class SchoolListComponent implements OnInit {
     this.fetchSchools();
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isAdminLoggedIn = isLoggedIn;
+      if (!isLoggedIn) {
+        this.showCreate = false;
+        this.showManage = false;
+        this.showDelete = false;
+      }
     });
   }
 
@@ -113,18 +118,21 @@ export class SchoolListComponent implements OnInit {
     this.showCreate = !this.showCreate;
     this.showDelete = false;
     this.showManage = false;
+   
   }
 
   toggleShowManage() {
     this.showManage = !this.showManage;
     this.showCreate = false;
     this.showDelete = false;
+ 
   }
 
   toggleShowDelete() {
     this.showDelete = !this.showDelete;
     this.showCreate = false;
     this.showManage = false;
+  
   }
 
   toggleWithGreeting(popover: NgbPopover, context: { greeting: string }) {
