@@ -47,6 +47,7 @@ export class ManageStudentComponent implements OnInit {
   listLangage: Langage[] = [];
   selectedLangageIds: number[] = [];
   isEnrolledInSchool: boolean = false;
+  previewImg: string | null = null;
 
   constructor(
     private schoolService: SchoolService,
@@ -99,6 +100,11 @@ export class ManageStudentComponent implements OnInit {
     if (file) {
       this.selectedFile = file;
     }
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewImg = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   onSubmit(form: NgForm) {

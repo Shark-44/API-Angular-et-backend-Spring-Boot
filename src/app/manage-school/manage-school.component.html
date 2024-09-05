@@ -11,10 +11,13 @@
           <label>Photo</label>
           <input type="file" (change)="onFileSelected($event)">
         </div>
-        <div *ngIf="photoSchool">
-            <img [src]="imageUrl + photoSchool" alt="Photo de l'école">
+        <div *ngIf="previewImg">
+                <img [src]="previewImg" alt="Prévisualisation" style="max-width: 300px; max-height: 300px;">
+        </div>
+        <div *ngIf="photoSchool && !previewImg">
+            <img [src]="imageUrl + '/' + photoSchool" alt="Photo de l'école">
           </div>
-          <div *ngIf="!photoSchool">
+          <div *ngIf="!photoSchool && !previewImg">
             <p>Aucune photo disponible</p>
           </div>
         </div>

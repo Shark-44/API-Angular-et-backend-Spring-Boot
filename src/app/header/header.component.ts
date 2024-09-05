@@ -41,7 +41,7 @@ export class AppHeaderComponent implements OnInit {
 
   logout() {
     const logoutUrl = `${environment.apiUrl2}/logout`;
-    console.log('URL de déconnexion:', logoutUrl);
+    
     this.http.get(logoutUrl, { responseType: 'text' })
     .subscribe(
       (response: string) => {

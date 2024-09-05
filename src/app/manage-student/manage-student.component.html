@@ -19,16 +19,19 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         
-        <!-- Champ de fichier sans mat-form-field -->
+       
         <div class="photo">
         <div>
           <label>Photo</label>
           <input type="file" (change)="onFileSelected($event)">
         </div>
-        <div *ngIf="photo">
-            <img [src]="imageUrl + photo" alt="Photo de l'étudiant">
+        <div *ngIf="previewImg">
+          <img [src]="previewImg" alt="Prévisualisation" style="max-width: 300px; max-height: 300px;">
+        </div>
+        <div *ngIf="photo  && !previewImg">
+            <img [src]="imageUrl + '/'  + photo" alt="Photo de l'étudiant">
           </div>
-          <div *ngIf="!photo">
+          <div *ngIf="!photo  && !previewImg">
             <p>Aucune photo disponible</p>
           </div>
         </div>

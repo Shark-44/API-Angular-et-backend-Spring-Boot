@@ -32,6 +32,7 @@ export class ManageSchoolComponent implements OnInit {
   associatedLangages: Langage[] = [];
   selectedLangages: number[] = [];
   newLangageName: string = '';
+  previewImg: string | null = null;
   
 
   constructor(
@@ -69,7 +70,13 @@ export class ManageSchoolComponent implements OnInit {
     if (file) {
       this.selectedFile = file;
     }
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewImg = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
+  
   
   onSubmit(form: NgForm) {
     if (this.selectedFile) {
